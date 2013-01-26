@@ -1,0 +1,134 @@
+{% load cms_tags sekizai_tags menu_tags zinnia_tags %}
+
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  {% block meta %}{% endblock %}
+
+  <title>Energiek Landschapshout - {{ request.current_page.get_title }}</title>
+
+  <meta name="description" content="{% page_attribute meta_description %}"/>
+  <meta name="keywords" content="{% page_attribute meta_keywords %}"/>
+
+  <!-- Included CSS Files (Uncompressed) -->
+  <!--
+  <link rel="stylesheet" href="stylesheets/foundation.css">
+  -->
+  
+  <!-- Included CSS Files (Compressed) -->
+    {% addtoblock "css" %}<link href="{{ STATIC_URL }}stylesheets/foundation.min.css"  rel="stylesheet" type="text/css" />{% endaddtoblock %}
+    {% addtoblock "css" %}<link href="{{ STATIC_URL }}stylesheets/app.css"  rel="stylesheet" type="text/css" />{% endaddtoblock %}
+    {% addtoblock "css" %}<link href="{{ STATIC_URL }}stylesheets/project.css"  rel="stylesheet" type="text/css" />{% endaddtoblock %}
+
+  <script src="{{ STATIC_URL }}javascripts/modernizr.foundation.js"></script>
+
+  {% render_block "css" %}
+</head>
+<body>
+
+{% cms_toolbar %}
+<div class="background-container hide-for-small "><div class="background transparent row"></div></div>
+
+<div class="header-background" id="header">
+    <div class="row">
+        <div class="three columns"><a href="/"><img src="{{ STATIC_URL }}images/logo.png" class="logo hide-for-small" /></a></div>
+        <div class="nine columns offset-by-three header-title">
+            {% placeholder "header" or %}
+                {% show_placeholder "header" "home" %}
+            {% endplaceholder %}
+        </div>
+    </div>
+</div>
+<div class="sticky contain-to-grid nav-container" id="nav">
+    <div class="nav-background">
+        <div class="row nav">
+            <ul class="right">
+                {% show_menu 0 1 1 1 "menu/header_menu.html" %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="content">
+    <noscript>
+        <div class="alert-box twelve columns">
+            Verschillende onderdelen van deze website werken enkel door Javascript te activeren.
+            <a href="http://www.enable-javascript.com/nl/" target="_blank" class="white-text">
+                Hier vind je instructies over hoe je Javascript activeert in je web browser</a>.
+        </div>
+    </noscript>
+    {% block main %}
+        <div class="twelve columns">{% with 940 as width %}{% placeholder "main" %}{% endwith %}</div>
+    {% endblock %}
+</div>
+
+    <div id="footer" >
+    <div class="row">
+        <div class="four columns">
+            {% placeholder "footer-1" "home" or %}
+                <h4>Op deze website</h4>
+                <div class="row footermenu"> {% show_menu 0 1 1 1 'menu/footer_menu.html' %}</div>
+            {% endplaceholder %}
+        </div>
+        <div class="four columns">
+            {% placeholder "footer-2" or %}
+                {% show_placeholder "footer-2" "home" %}
+            {% endplaceholder %}
+        </div>
+        <div class="four columns">
+            {% placeholder "footer-3" or %}
+                {% show_placeholder "footer-3" "home" %}
+            {% endplaceholder %}
+        </div>
+    </div>
+    </div>
+    <div id="credits" >
+        <div class="row">
+            <div class="twelve columns"><p>Copyright 2013 | Designed by Steven Vande Ryse | Powered by Django</p></div>
+        </div>
+    </div>
+
+  <!-- Included JS Files (Uncompressed) -->
+  <!--
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/jquery.foundation.mediaQueryToggle.js"></script>
+  <script src="javascripts/jquery.foundation.forms.js"></script>
+  <script src="javascripts/jquery.event.move.js"></script>
+  <script src="javascripts/jquery.event.swipe.js"></script>
+  <script src="javascripts/jquery.foundation.reveal.js"></script>
+  <script src="javascripts/jquery.foundation.orbit.js"></script>
+  <script src="javascripts/jquery.foundation.navigation.js"></script>
+  <script src="javascripts/jquery.foundation.buttons.js"></script>
+  <script src="javascripts/jquery.foundation.tabs.js"></script>
+  <script src="javascripts/jquery.foundation.tooltips.js"></script>
+  <script src="javascripts/jquery.foundation.accordion.js"></script>
+  <script src="javascripts/jquery.placeholder.js"></script>
+  <script src="javascripts/jquery.foundation.alerts.js"></script>
+  <script src="javascripts/jquery.foundation.topbar.js"></script>
+  <script src="javascripts/jquery.foundation.joyride.js"></script>
+  <script src="javascripts/jquery.foundation.clearing.js"></script>
+  <script src="javascripts/jquery.foundation.magellan.js"></script>
+  
+  -->
+
+<script src="{{ STATIC_URL }}javascripts/jquery.js"></script>
+{% render_block "js" %}
+{% addtoblock "js" %}
+
+  <!-- Included JS Files (Compressed) -->
+  <script src="{{ STATIC_URL }}javascripts/foundation.min.js"></script>
+
+  <!-- Initialize JS Plugins -->
+  <script src="{{ STATIC_URL }}javascripts/app.js"></script>
+
+
+  {% endaddtoblock %}
+</body>
+</html>

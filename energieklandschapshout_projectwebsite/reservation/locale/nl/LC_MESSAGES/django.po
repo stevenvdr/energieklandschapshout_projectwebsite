@@ -1,0 +1,104 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-11-22 22:16+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: cms_plugins.py:17
+msgid "Reservation"
+msgstr "Reservatie"
+
+#: cms_plugins.py:37 cms_plugins.py:47
+#, python-format
+msgid "New reservation for %s"
+msgstr "Nieuwe reservatie voor %s"
+
+#: cms_plugins.py:38
+#, fuzzy, python-format
+msgid "A new reservation was made for %(name)s.\n"
+msgstr "Nieuwe reservatie voor %s.\n"
+
+#: cms_plugins.py:39
+msgid "Contact information:\n"
+msgstr "Contact informatie\n"
+
+#: cms_plugins.py:40
+#, python-format
+msgid "- Name: %(contact_name)s\n"
+msgstr "- Naam: %(contact_name)s\n"
+
+#: cms_plugins.py:41
+#, python-format
+msgid "- Email: %(contact_mail)s\n"
+msgstr "- Email: %(contact_mail)s\n"
+
+#: cms_plugins.py:42
+#, python-format
+msgid "- Phone number: %(contact_phone)s\n"
+msgstr "- Telefoon nummer: %(contact_phone)s\n"
+
+#: cms_plugins.py:48
+#, python-format
+msgid ""
+"You have just made a reservation for %(name)s. Your reservation will now be "
+"reviewed.\n"
+msgstr ""
+"U heeft zopas een reservatie gemaakt voor %(name)s. Uw reservatie zal nu worden nagegeken. \n"
+
+#: cms_plugins.py:49
+#, python-format
+msgid "If you have further questions, please contact us at %(mail)s.\n"
+msgstr "Indien u nog vragen heeft, gelieve ons te contacteren op %(mail)s.\n"
+
+#: cms_plugins.py:54
+msgid ""
+"Your reservation was successful, and is now pending. You will have received "
+"an email confirming this."
+msgstr ""
+"Uw reservatie was succesvol, en wordt nu nagekeken. U zal hierover ook een "
+"mail gekregen hebben."
+
+#: cms_plugins.py:138
+msgid "The reservation has been approved."
+msgstr "De reservatie werd goedgekeurd."
+
+#: cms_plugins.py:140 cms_plugins.py:149
+msgid "Incorrect request."
+msgstr "Incorrecte aanvraag."
+
+#: cms_plugins.py:147
+msgid "The reservation has been deleted."
+msgstr "De reservatie werd verwijderd."
+
+#: models.py:7
+msgid "Who needs to be contacted if there are new reservations"
+msgstr "Wie moet er gecontacteerd worden als er nieuwe reservaties binnen komen."
+
+#~ msgid ""
+#~ "A new reservation was made for %(name)s.\n"
+#~ "                            Contact information:\n"
+#~ "                            - Name: %(contact_name)s\n"
+#~ "                            - Email: %(contact_mail)s\n"
+#~ "                            - Phone number: %(contact_phone)s\n"
+#~ "                            "
+#~ msgstr ""
+#~ "Er werd een nieuwe reservatie gemaakt door %(name)s.\n"
+#~ "                            Contact informatie:\n"
+#~ "                            - Name: %(contact_name)s\n"
+#~ "                            - Email: %(contact_mail)s\n"
+#~ "                            - Phone number: %(contact_phone)s\n"
+#~ "                            "

@@ -1,0 +1,12 @@
+{% load i18n %}
+{% load url from future %}
+<form method="get" id="searchform" action="{% url 'zinnia_entry_search' %}">
+<div class="row collapse">
+    <div class="eight mobile-three columns">
+        <input type="text" placeholder="Nieuwsberichten"/>
+    </div>
+    <div class="four mobile-one columns">
+        <a class="button expand postfix">Zoeken</a>
+    </div>
+</div>
+</form>

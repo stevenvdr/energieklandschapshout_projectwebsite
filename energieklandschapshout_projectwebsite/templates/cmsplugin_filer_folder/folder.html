@@ -1,0 +1,107 @@
+{% load i18n thumbnail sekizai_tags %}
+{% comment %} {% addtoblock "css" %}<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}cmsplugin_filer_folder/css/slideshow.css" media="screen, projection" />{% endaddtoblock "css" %}
+{% addtoblock "js" %}<script type="text/javascript" src="{{ STATIC_URL }}cmsplugin_filer_folder/js/jquery.cycle.lite-1.0.js"></script>{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+//<![CDATA[
+jQuery(document).ready(function ($) {
+    $('.cmsplugin_filer_folder_slidshow').cycle({
+        fx: 'fade'
+    });
+});
+//]]>
+</script>
+{% endaddtoblock %}
+{% endcomment %}
+
+{% comment %}
+{% if object.view_option == "list" %}
+    <div class="cmsplugin_filer_folder_list" id="folder_{{ instance.id }}">
+        <!--The files should go there    -->
+        {% if folder_children %}
+        <p>{% trans "Folders" %}</p>
+        <ul>
+            {% for folder in folder_children %}
+                <li>{{ folder }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% if folder_files %}
+        <p>{% trans "Files" %}</p>
+        <ul>
+            {% for files in folder_files %}
+                <li>{{ files }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% if folder_images %}
+        <p>{% trans "Images" %}</p>
+        <ul>
+            {% for image in folder_images %}
+                <li><img src="{% thumbnail image.file 32x32 crop="True" upscale="True" %}" width="32" height="32" alt="{{ image.label }}"></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+{% endcomment %}
+{% if object.view_option == "slideshow"  %}
+    <!-- start: slideshow -->
+    <div id="folder_{{ object.id }}">
+        {% for image in folder_images %}
+            <img src="{% thumbnail image.file 940x500 crop="True" %}">
+        {% endfor %}
+    </div>
+    {% addtoblock "js" %}
+        <script type="text/javascript">
+            $(window).load(function() {
+                $("#folder_{{ object.id }}").orbit();
+            });
+        </script>
+    {% endaddtoblock %}
+    <!-- end: slideshow -->
+{% endif %}
+
+{% if object.view_option == "slideshow_description"  %}
+    <!-- start: slideshow -->
+    <div id="folder_{{ object.id }}">
+        {% for image in folder_images %}
+            <img src="{% thumbnail image.file 940x500 crop="True" %}">
+        {% endfor %}
+    </div>
+    {% addtoblock "js" %}
+        <script type="text/javascript">
+            $(window).load(function() {
+                $("#folder_{{ object.id }}").orbit();
+            });
+        </script>
+    {% endaddtoblock %}
+    <!-- end: slideshow -->
+{% endif %}
+
+{% if object.view_option == "slide_desc"  %}
+    <!-- start: slideshow -->
+    <div id="folder_{{ object.id }}">
+        {% for image in folder_images %}
+            <div class="slide">
+                <img src="{% thumbnail image.file 940x500 crop="True" %}">
+                {% if image.description %}<div class="slide-description">{{ image.description|safe }}</div> {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    {% addtoblock "js" %}
+        <script type="text/javascript">
+            $(window).load(function() {
+                $("#folder_{{ object.id }}").orbit();
+            });
+        </script>
+    {% endaddtoblock %}
+    <!-- end: slideshow -->
+{% endif %}
+
+{% if object.view_option == "gallery"  %}
+    <ul class="block-grid six-up mobile-three-up" data-clearing id="folder_{{ object.id }}">
+        {% for image in folder_images %}
+            <li><a href="{{ image.url }}"><img data-caption="{% if image.description %}{{ image.description }}{% endif %}" src="{% thumbnail image.file 100x100 crop="True" upscale="True" %}"></a></li>
+        {% endfor %}
+    </ul>
+{% endif %}

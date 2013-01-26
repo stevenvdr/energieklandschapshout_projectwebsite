@@ -1,0 +1,119 @@
+{% load sekizai_tags %}
+{% load i18n %}
+
+{% addtoblock "js" %}
+<script type="text/javascript" xmlns="http://www.w3.org/1999/html" src="{{ STATIC_URL }}admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}javascripts/calendar.js"></script>
+<script type="text/javascript">
+    {% if not form.errors %}window.onload=hideForm(); var form_shown = true; {% else %} var form_shown = false; {% endif %}
+    hideContact(); var contact_shown = false;
+    $(document).keyup(function(e) {
+        if (e.keyCode == 27) { hideForm(); hideContact();}   // esc
+    });
+    </script>
+{% endaddtoblock %}
+
+{% addtoblock "css" %}
+<link href="{{ STATIC_URL }}stylesheets/calendar.css"  rel="stylesheet" type="text/css" />
+{% endaddtoblock %}
+
+<div id="calendar_navigation" class="row">
+    <div class="twelve columns"><h2 class="text-center">{{ month|date:"F Y"}}</h2></div>
+    <div class="three columns ">{% if prev_month %}<a href="?month={{ prev_month.month }}&year={{ prev_month.year }}">Ga een maand terug</a>{% endif %}</div>
+    <div class="three columns offset-by-six text-right"><a href="?month={{ next_month.month }}&year={{ next_month.year }}">Ga een maand vooruit</a></div>
+</div>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert-box {% if message.tags %}{{ message.tags }}{% endif %}">
+            {{ message }}
+            <a href="" class="close">&times;</a>
+        </div>
+    {% endfor %}
+{% endif %}
+<div id="calendar_container">
+<div id="calendar">
+    <table class="calendar">
+    <tr>
+        <th>Maandag</th>
+        <th>Dinsdag</th>
+        <th>Woensdag</th>
+        <th>Donderdag</th>
+        <th>Vrijdag</th>
+        <th>Zaterdag</th>
+        <th>Zondag</th>
+    </tr>
+    {% for day in calendar %}
+    {% cycle '<tr><td' '<td' '<td' '<td' '<td' '<td' '<td' %}>
+    {{ day.date|date:"j M"}}</br>
+
+    {% if not day.reservation %}
+        <img src="{{ STATIC_URL }}images/reservation/green.jpg" alt="Deze dag is nog vrij"/>
+        <a href="#" onclick="return clickSubscribe('{{ day.date|date:"SHORT_DATE_FORMAT" }}');"> <img src="{{ STATIC_URL }}images/reservation/edit.jpg" alt="Reserveer deze dag"/></a>
+    {% else %}
+        {% if day.reservation.approved %}
+            <img src="{{ STATIC_URL }}images/reservation/red.jpg" alt="Deze dag werd al gereserveerd"/>
+            {% if request.user.is_superuser %}
+        <a href="#" onclick="return clickReservation('{{ day.date|date:"SHORT_DATE_FORMAT"}}',
+        '{{ day.reservation.contact_name }}',
+        '{{ day.reservation.contact_mail }}',
+        '{{ day.reservation.contact_phone }}',
+        true );"><img src="{{ STATIC_URL }}images/reservation/magnifying_glass.png" alt="Bekijk contact informatie"/></a>
+                <a href="?delete={{ day.date|date:"SHORT_DATE_FORMAT" }}"><img src="{{ STATIC_URL }}images/reservation/remove.jpg" alt="Verwijder deze reservatie"/></a>
+            {% endif %}
+        {% else %}
+            <img src="{{ STATIC_URL }}images/reservation/orange.jpg" alt="Deze dag werd al gereserveerd, maar nog niet goedgekeurd"/>
+            {% if request.user.is_superuser %}
+                <a href="#" onclick="return clickReservation('{{ day.date|date:"SHORT_DATE_FORMAT"}}',
+        '{{ day.reservation.contact_name }}',
+        '{{ day.reservation.contact_mail }}',
+        '{{ day.reservation.contact_phone }}',
+        false );"><img src="{{ STATIC_URL }}images/reservation/magnifying_glass.png" alt="Bekijk contact informatie"/></a>
+                <a href="?approve={{ day.date|date:"SHORT_DATE_FORMAT" }}"><img src="{{ STATIC_URL }}images/reservation/approve.jpg" alt="Keur deze reservatie goed"/></a>
+                <a href="?delete={{ day.date|date:"SHORT_DATE_FORMAT" }}"><img src="{{ STATIC_URL }}images/reservation/remove.jpg" alt="Verwijder deze reservatie"/></a>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+    {% cycle '</td>' '</td>' '</td>' '</td>' '</td>' '</td>' '</td></tr>' %}
+    {% endfor %}
+    </table>
+</div>
+
+<div id="calendar_form_container">
+    <div id="calendar_form" class="row">
+        <div class="four columns centered background-white calenderform text-center">
+        <a href="#" onclick="return hideForm();">Sluit dit venster</a>
+        <form class="text-left" method="post" action="">
+            {%  csrf_token %}
+            {% for field in form %}
+                <div>
+                    <label {% if field.errors %}class="error"{% endif %} for="{{ field.auto_id }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <small class="error">{{ error|escape }}</small>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <ul class="button-group even two-up">
+                <li><input type="submit" value="Verzenden" class="button"/></li>
+                <li><button onclick="hideForm()" type="button" class="button">Annuleren</button></li>
+            </ul>
+        </form>
+        </div>
+    </div>
+</div>
+    {% if request.user.is_superuser %}
+    <div id="calendar_contact_container"></div>
+    {% endif %}
+
+</div>
+
+<div id="help">
+    <p> Legende:<br/>
+        <img src="{{ STATIC_URL }}images/reservation/green.jpg" alt="Deze dag is nog vrij"/> = Deze dag is nog vrij<br/>
+        <img src="{{ STATIC_URL }}images/reservation/red.jpg" alt="Deze dag werd al gereserveerd"/> = Deze dag werd al gereserveerd<br/>
+        <img src="{{ STATIC_URL }}images/reservation/orange.jpg" alt="Deze dag werd al gereserveerd, maar nog niet bevestigd"/>
+            = Deze dag werd al gereserveerd, maar nog niet bevestigd<br/>
+        <img src="{{ STATIC_URL }}images/reservation/edit.jpg" alt="Reserveer deze dag" width="15px"/> = Reserveer deze dag<br/>
+
+    </p>
+</div>

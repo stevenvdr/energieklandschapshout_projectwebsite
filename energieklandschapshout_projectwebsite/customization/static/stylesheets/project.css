@@ -1,0 +1,83 @@
+/* Custom Skin */
+/* General elements */
+html, body {min-height: 100%;}
+body {}
+
+.transparent {opacity:0.8; background-color: #ffffff;}
+.background-white {background-color: #fff; }
+
+.alert-box.error {background-color: red;}
+.alert-box.warning {background-color: #ff8c00;}
+
+.white-text { color: #fff;}
+
+/* Background Elements */
+.background-container {height: 100%; width: 100%; position: absolute; background-image: url("../images/background.jpg"); z-index: -1000;}
+.background {height: 100%; position: relative; z-index: -1000;}
+
+/* Header elements */
+.logo {position: absolute;z-index: 100;}
+.header-background {background-color: #57b947;}
+.header-title h1, .header-title h2, .header-title h3, .header-title h4, .header-title h5, .header-title p{color: #ffffff; text-align: center;}
+@media screen and (max-width:480px) {
+    .header-title h1 {font-size: large;}
+}
+
+/* Navigation elements */
+.nav-container {background:none; overflow: visible;}
+
+.nav {height: 30px;}
+.nav ul {margin: 0; }
+.nav ul li {display: block; line-height: 30px; float: left; margin-left: 15px;}
+.nav ul li a{padding: 10px; color: #ffffff; font-weight: bold;}
+.nav > ul > li > a.active {background-image: url("../images/nav_arrow.png"); background-position: bottom center; background-repeat: no-repeat;}
+.nav > ul > li > a:hover {background-image: url("../images/nav_arrow.png"); background-position: bottom center; background-repeat: no-repeat;}
+.nav-background {background-color: #4ea440; border-bottom: 10px #22c3f3 solid;}
+
+.has-submenu .submenu {position: absolute; visibility: hidden; width: 100%; left: 0px; background-color: #22c3f3;}
+.has-submenu:hover .submenu {visibility: visible;}
+
+.submenu ul {margin-right: 10px;}
+.submenu ul li a{color: #222; font-weight: bold;font-size: 12px; padding: 0; }
+.submenu ul li a:hover{ color: #fff;}
+
+/* Fix for a row in a row being relative */
+@media screen and (min-width:768px) {
+    .submenu div.row, #footer-container div.row{width: 940px; max-width: 100%; min-width: 768px; margin: 0 auto;}
+}
+.submenu div.row{max-width: 100%; margin: 0 auto;}
+
+/* Content elements */
+#content {margin-top: 120px;}
+
+/* Footers elements */
+#footer-container {bottom: 0px; position: absolute; width: 100%;}
+#footer p, #footer h1, #footer h2, #footer h3, #footer h4, #footer address, #footer h5, #footer ul, #footer li, #footer a {color: #fff;}
+#footer {background-color: #57B947; border-top: 10px #22c3f3 solid; text-align: center; padding-bottom: 10px; }
+#footer ul { list-style: none; text-align: left;}
+#footer ul > li { margin-bottom: 7px; line-height: 18px;}
+.footermenu ul > li > ul > li  { margin-bottom: 0;}
+
+li.cms_placeholder-subnav-title ul > li > a{color: #222 !important;}
+
+#credits {background-color: #4ea440;}
+#credits p {text-align: center; margin: 2px; color: #222}
+
+/*Blog Elements */
+.entry-title a {color: #222;}
+
+#content div.hentry.preview { padding-bottom: 5px; }
+#content div.hentry.preview h2 { font-size: x-large; line-height: 40px;}
+#content div.hentry.preview p { margin-bottom: 0; }
+#content div.hentry.preview div.entry-header { text-align: left; }
+#content div.hentry.preview .entry-header p, #content div.hentry.preview .entry-header h2 { display: inline; }
+
+/* Slider Elements */
+.slide-description { bottom: 0px; position: absolute; width: 100%; background: #000; opacity: 0.8; padding: 10px; color: #fff; }
+.slide-description p{ color: #fff; }
+.slide-description a{ color: #fff; text-decoration: underline; }
+.slide-description a:hover{ color: #ddd; }
+
+/* Calendar elements */
+.calenderform {border: 1px solid #aaa; padding: 20px; line-height: 20px; }
+.calender { background: none;}

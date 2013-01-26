@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load cms_tags %}
+{% load i18n %}
+{% load url from future %}
+
+{% block main %}
+    <div class="nine columns">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert-box {% if message.tags %}{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% block content %}{% with 705 as width %}{% placeholder "main" %}{% endwith %}{% endblock %}
+    </div>
+    <div class="three columns">{% block sidebar %}{% with 235 as width %}{% placeholder "sidebar" %}{% endwith %}{% endblock %}</div>
+{% endblock %}

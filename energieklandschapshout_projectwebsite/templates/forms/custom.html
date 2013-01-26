@@ -1,0 +1,38 @@
+{% load friendly i18n %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert-box {% if message.tags %}{{ message.tags }}{% endif %}">
+            {{ message }}
+            <a href="" class="close">&times;</a>
+        </div>
+    {% endfor %}
+{% endif %}
+<form class="six columns" name="{{ form_definition.name }}" action="{{ form_definition.action }}" method="{{ form_definition.method }}" enctype="multipart/form-data">
+    {% for entry in logs %}
+        {% for field in entry.data %}
+            <p>
+                <label for="">{{ field.label }}</label>
+                {{ field.value|friendly }}
+            </p>
+        {% endfor %}
+    {% endfor %}
+    {% for field in form %}
+        {% if not field.is_hidden %}
+            <div>
+                <label {% if field.errors %}class="error"{% endif %}>{{ field.label }}</label>
+                {{ field }}
+                {% for error in field.errors %}
+                    <small class="error">{{ error|escape }}</small>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
+    <p class="buttons">
+        {% include "forms/submit.html" %}
+    </p>
+    {% for field in form.hidden_fields %}
+        {{ field }}
+    {% endfor %}
+    {% csrf_token %}
+
+</form>

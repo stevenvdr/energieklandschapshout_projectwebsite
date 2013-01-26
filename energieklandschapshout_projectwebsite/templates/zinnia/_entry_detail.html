@@ -1,0 +1,73 @@
+{% load tagging_tags comments i18n sekizai_tags  placeholder_tags %}
+{% load url from future %}
+{% addtoblock "css" %}<link href="{{ STATIC_URL }}css/blog.css"  rel="stylesheet" type="text/css" />{% endaddtoblock %}
+
+<div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %}
+      {% if continue_reading %} preview{% endif %}">
+  <div class="entry-header">
+    <h2 class="entry-title">
+      <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
+        {{ object.title }}
+      </a>
+    </h2>
+    <p class="entry-info">
+      {% trans "Geschreven op" %}
+      <abbr class="published" title="{{ object.creation_date|date:"c" }}Z">{{ object.creation_date|date:"DATE_FORMAT" }}</abbr>
+      {% if object.categories.count %}
+      {% trans "in" %}
+      {% for category in object.categories.all %}
+      <a href="{{ category.get_absolute_url }}"
+         title="{% blocktrans %}Show all entries in {{ category }}{% endblocktrans %}"
+         rel="tag category">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}
+    </p>
+  </div>
+
+  <div class="entry-body">
+    {% if object.image %}
+      {% if not continue_reading %}
+    <div class="entry-image">
+      <p>
+        {% if continue_reading %}
+        <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
+        {% endif %}
+          <img src="{{ object.image.url }}" alt="{{ object.title }}" class="left scale-with-grid" />
+        {% if continue_reading %}
+        </a>
+        {% endif %}
+      </p>
+    </div>
+      {% endif %}
+    {% endif %}
+    <div class="entry-content">
+
+        {% if not continue_reading %}
+        {% render_placeholder object.content_placeholder "640" %}
+        {% else %}
+            {{ object_content }}
+        {% endif %}
+    </div>
+    {% if continue_reading %}
+    <p class="continue-reading">
+      <a href="{{ object.get_absolute_url }}"
+         title="{% blocktrans with object=object.title %}Continue reading {{ object }}{% endblocktrans %}"
+         rel="bookmark">
+        {% trans "Lees Verder" %}
+      </a>
+    </p>
+    {% endif %}
+  </div>
+  {% if not continue_reading %}
+  <div class="entry-footer">
+
+    <p class="entry-shorturl">
+      <strong>{% trans "Short url" %}</strong> :
+      <a href="{{ object.short_url }}"
+         title="{% blocktrans with object=object.title %}Short URL to {{ object }}{% endblocktrans %}"
+         rel="shortlink">
+        {{ object.short_url }}
+      </a>
+    </p>
+
+  </div>
+  {% endif %}
+</div>
