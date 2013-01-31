@@ -34,12 +34,13 @@ body {}
 .nav > ul > li > a:hover {background-image: url("../images/nav_arrow.png"); background-position: bottom center; background-repeat: no-repeat;}
 .nav-background {background-color: #4ea440; border-bottom: 10px #22c3f3 solid;}
 
-.has-submenu .submenu {position: absolute; visibility: hidden; width: 100%; left: 0px; background-color: #22c3f3;}
-.has-submenu:hover .submenu {visibility: visible;}
-
-.submenu ul {margin-right: 10px;}
-.submenu ul li a{color: #222; font-weight: bold;font-size: 12px; padding: 0; }
-.submenu ul li a:hover{ color: #fff;}
+.nav-background div.top-bar {background: none; min-height: 0px;}
+.nav-background div.top-bar > ul {line-height: 30px; height: 30px;}
+.nav-background div.top-bar > ul > li {background: none !important; color: #ffffff !important;}
+.nav-background div.top-bar > ul > li > a{line-height: 30px; height: 30px; font-size: 14px;}
+.nav-background div.top-bar > ul > li > ul.dropdown > li {background: #22c3f3;}
+.nav-background div.top-bar > ul > li > ul.dropdown {background: #22c3f3;}
+.nav-background div.top-bar > ul > li > ul.dropdown > li > a:hover {background: #33d3f3;}
 
 /* Fix for a row in a row being relative */
 @media screen and (min-width:768px) {
@@ -49,13 +50,16 @@ body {}
 
 /* Content elements */
 #content {margin-top: 120px;}
+#content p {text-align: justify;}
 
 /* Footers elements */
 #footer-container {bottom: 0px; position: absolute; width: 100%;}
 #footer p, #footer h1, #footer h2, #footer h3, #footer h4, #footer address, #footer h5, #footer ul, #footer li, #footer a {color: #fff;}
 #footer {background-color: #57B947; border-top: 10px #22c3f3 solid; text-align: center; padding-bottom: 10px; }
 #footer ul { list-style: none; text-align: left;}
-#footer ul > li { margin-bottom: 7px; line-height: 18px;}
+#footer ul > li { margin-bottom: 0px; line-height: 18px;}
+
+div.footermenu ul li a {font-size: 12px;}
 .footermenu ul > li > ul > li  { margin-bottom: 0;}
 
 li.cms_placeholder-subnav-title ul > li > a{color: #222 !important;}

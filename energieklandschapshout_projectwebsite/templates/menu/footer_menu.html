@@ -1,6 +1,6 @@
 {% load menu_tags %}
 {% for child in children %}
-    {% if not child.menu_level %}{% cycle "<ul class='six columns'>" "" "" %}{% endif %}
+    {% if not child.menu_level %}{% cycle "<ul class='twelve columns'>" "" "" %}{% endif %}
     <li class="">
         <a href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">{{ child.get_menu_title }}</a>
         {% if child.children %}
